@@ -1,11 +1,12 @@
 window.addEventListener("DOMContentLoaded", createEtchASketch);
 
 function createEtchASketch() {
+    let userChoice = 4;
     const squaresContainer = createSquaresContainer();
-    createSquares(squaresContainer);
+    createSquares(squaresContainer, userChoice);
     const btnsContainer = createBtnsContainer();
     createCustomizeBtn(btnsContainer);
-    createClearBtn(btnsContainer);
+    createClearBtn(btnsContainer, squaresContainer);
 }
 
 function createSquaresContainer() {
@@ -23,8 +24,9 @@ function colorizeSquare(e) {
     }
 }
 
-function createSquares(container, squaresQuantity = 4) {
-    container.innerText = "";
+function createSquares(container, squaresQuantity) {
+    container.innerHTML = "";
+
     const containerWidth = window.getComputedStyle(container).width;
     const containerWithNum = containerWidth.slice(0, length - 2);
     const totalSquares = squaresQuantity * squaresQuantity;
@@ -55,25 +57,27 @@ function createCustomizeBtn(container) {
 }
 
 function updateSquares() {
-    const userChoice = prompt("How many squares would you like? (1-40)");
+    userChoice = prompt("How many squares would you like? (1-100)");
     let userChoiceSanitized = parseInt(userChoice);
     if (userChoice <= 0) {
         userChoiceSanitized = 1;
     }
 
-    if (userChoice > 40) {
-        userChoiceSanitized = 40;
+    if (userChoice > 100) {
+        userChoiceSanitized = 100;
     }
 
     const container = document.getElementsByClassName("squares-container")[0];
     createSquares(container, userChoiceSanitized);
 }
 
-function createClearBtn(container) {
+function createClearBtn(btnsContainer, squaresContainer) {
     const clearBtn = document.createElement("button");
     clearBtn.classList.add("button");
     clearBtn.classList.add("clear-button");
     clearBtn.innerText = "Clear";
-    clearBtn.addEventListener("click", updateSquares);
-    container.appendChild(clearBtn);
+    btnsContainer.appendChild(clearBtn);
+    clearBtn.addEventListener("click", () => {
+        createSquares(squaresContainer, userChoice);
+    });
 }
