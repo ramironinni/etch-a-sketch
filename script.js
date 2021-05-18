@@ -5,8 +5,8 @@ function createEtchASketch() {
     const squaresContainer = createSquaresContainer();
     createSquares(squaresContainer, userChoice);
     const btnsContainer = createBtnsContainer();
-    createCustomizeBtn(btnsContainer);
-    createClearBtn(btnsContainer, squaresContainer);
+    createCustomizeRange(btnsContainer);
+    createClearBtn(btnsContainer);
 }
 
 function createSquaresContainer() {
@@ -47,17 +47,19 @@ function createBtnsContainer() {
     return btnsContainer;
 }
 
-function createCustomizeBtn(container) {
-    const customizeBtn = document.createElement("button");
-    customizeBtn.classList.add("customize-button");
-    customizeBtn.classList.add("button");
-    customizeBtn.innerText = "Customize";
-    customizeBtn.addEventListener("click", updateSquares);
-    container.appendChild(customizeBtn);
+function createCustomizeRange(container) {
+    const customizeRange = document.createElement("input");
+    customizeRange.type = "range";
+    customizeRange.min = "1";
+    customizeRange.classList.add("customize-range");
+    customizeRange.classList.add("button");
+    customizeRange.addEventListener("change", (e) => {
+        updateSquares(e.target.value);
+    });
+    container.appendChild(customizeRange);
 }
 
-function updateSquares() {
-    userChoice = prompt("How many squares would you like? (1-100)");
+function updateSquares(userChoice) {
     let userChoiceSanitized = parseInt(userChoice);
     if (userChoice <= 0) {
         userChoiceSanitized = 1;
@@ -71,13 +73,13 @@ function updateSquares() {
     createSquares(container, userChoiceSanitized);
 }
 
-function createClearBtn(btnsContainer, squaresContainer) {
+function createClearBtn(btnsContainer) {
     const clearBtn = document.createElement("button");
     clearBtn.classList.add("button");
     clearBtn.classList.add("clear-button");
     clearBtn.innerText = "Clear";
     btnsContainer.appendChild(clearBtn);
     clearBtn.addEventListener("click", () => {
-        createSquares(squaresContainer, userChoice);
+        createSquares;
     });
 }
