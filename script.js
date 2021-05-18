@@ -2,32 +2,18 @@ window.addEventListener("DOMContentLoaded", createEtchASketch);
 
 function createEtchASketch() {
     const squaresContainer = createSquaresContainer();
-    createSquares(squaresContainer, 4);
-    createCustomizeBtn();
+    createSquares(squaresContainer);
+    const btnsContainer = createBtnsContainer();
+    createCustomizeBtn(btnsContainer);
+    createClearBtn(btnsContainer);
 }
 
 function createSquaresContainer() {
     const squaresContainer = document.createElement("div");
     squaresContainer.classList.add("squares-container");
-    const body = document.body;
     squaresContainer.addEventListener("mouseover", colorizeSquare);
-    body.appendChild(squaresContainer);
+    document.body.appendChild(squaresContainer);
     return squaresContainer;
-}
-
-function createSquares(container, squares) {
-    container.innerText = "";
-    const containerWidth = window.getComputedStyle(container).width;
-    const containerWithNum = containerWidth.slice(0, length - 2);
-    const totalSquares = squares * squares;
-    const squareSize = containerWithNum / squares;
-
-    for (let i = 0; i < totalSquares; i++) {
-        const square = document.createElement("div");
-        square.classList.add("square");
-        square.style.width = `${squareSize}px`;
-        container.appendChild(square);
-    }
 }
 
 function colorizeSquare(e) {
@@ -37,20 +23,40 @@ function colorizeSquare(e) {
     }
 }
 
-function createCustomizeBtn() {
+function createSquares(container, squaresQuantity = 4) {
+    container.innerText = "";
+    const containerWidth = window.getComputedStyle(container).width;
+    const containerWithNum = containerWidth.slice(0, length - 2);
+    const totalSquares = squaresQuantity * squaresQuantity;
+    const squareSize = containerWithNum / squaresQuantity;
+
+    for (let i = 0; i < totalSquares; i++) {
+        const square = document.createElement("div");
+        square.classList.add("square");
+        square.style.width = `${squareSize}px`;
+        container.appendChild(square);
+    }
+}
+
+function createBtnsContainer() {
+    const btnsContainer = document.createElement("div");
+    btnsContainer.classList.add("buttons-container");
+    document.body.appendChild(btnsContainer);
+    return btnsContainer;
+}
+
+function createCustomizeBtn(container) {
     const customizeBtn = document.createElement("button");
     customizeBtn.classList.add("customize-button");
-    customizeBtn.innerText = "Customize!";
-    document.body.appendChild(customizeBtn);
+    customizeBtn.classList.add("button");
+    customizeBtn.innerText = "Customize";
     customizeBtn.addEventListener("click", updateSquares);
+    container.appendChild(customizeBtn);
 }
 
 function updateSquares() {
-    const userChoice = parseInt(
-        prompt("How many squares would you like? (1-40)")
-    );
-
-    let userChoiceSanitized = userChoice;
+    const userChoice = prompt("How many squares would you like? (1-40)");
+    let userChoiceSanitized = parseInt(userChoice);
     if (userChoice <= 0) {
         userChoiceSanitized = 1;
     }
@@ -61,4 +67,13 @@ function updateSquares() {
 
     const container = document.getElementsByClassName("squares-container")[0];
     createSquares(container, userChoiceSanitized);
+}
+
+function createClearBtn(container) {
+    const clearBtn = document.createElement("button");
+    clearBtn.classList.add("button");
+    clearBtn.classList.add("clear-button");
+    clearBtn.innerText = "Clear";
+    clearBtn.addEventListener("click", updateSquares);
+    container.appendChild(clearBtn);
 }

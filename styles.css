@@ -1,7 +1,7 @@
 body {
     font-family: "Montserrat", sans-serif;
     box-sizing: border-box;
-    width: auto;
+    margin: 0;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -22,9 +22,12 @@ body {
     cursor: pointer;
 }
 
-.customize-button {
-    margin-top: 20px;
-    background-color: #4049c5;
+.buttons-container {
+    display: flex;
+}
+
+.button {
+    margin: 30px 15px 0;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -36,6 +39,18 @@ body {
     box-shadow: 5px 5px 10px #767676;
 }
 
+.customize-button {
+    background-color: #4049c5;
+}
+
 .customize-button:hover {
     background-color: #5258a9;
+}
+
+.clear-button {
+    background-color: #913a96;
+}
+
+.clear-button:hover {
+    background-color: #b263b5;
 }
