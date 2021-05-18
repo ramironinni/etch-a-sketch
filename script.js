@@ -16,6 +16,7 @@ function createSquaresContainer() {
 }
 
 function createSquares(container, squares) {
+    container.innerText = "";
     const containerWidth = window.getComputedStyle(container).width;
     const containerWithNum = containerWidth.slice(0, length - 2);
     const totalSquares = squares * squares;
@@ -41,12 +42,23 @@ function createCustomizeBtn() {
     customizeBtn.classList.add("customize-button");
     customizeBtn.innerText = "Customize!";
     document.body.appendChild(customizeBtn);
-    customizeBtn.addEventListener("click", askNumberSquares);
+    customizeBtn.addEventListener("click", updateSquares);
 }
 
-function askNumberSquares() {
+function updateSquares() {
     const userChoice = parseInt(
-        prompt("How many squares would you like? (1-64)")
+        prompt("How many squares would you like? (1-40)")
     );
-    return userChoice;
+
+    let userChoiceSanitized = userChoice;
+    if (userChoice <= 0) {
+        userChoiceSanitized = 1;
+    }
+
+    if (userChoice > 40) {
+        userChoiceSanitized = 40;
+    }
+
+    const container = document.getElementsByClassName("squares-container")[0];
+    createSquares(container, userChoiceSanitized);
 }

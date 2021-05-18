@@ -10,11 +10,12 @@ body {
 }
 
 .squares-container {
-    width: 400px;
-    height: 400px;
+    width: 500px;
+    height: 500px;
     display: flex;
     flex-wrap: wrap;
-    border: 1px solid black;
+    border: 1px solid #767676;
+    box-shadow: 5px 5px 15px #767676;
 }
 
 .square {
