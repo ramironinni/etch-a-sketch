@@ -3,12 +3,19 @@ window.addEventListener("DOMContentLoaded", createEtchASketch);
 let userChoice = 4;
 let colorChoice = false;
 function createEtchASketch() {
+    createTitle();
     const squaresContainer = createSquaresContainer();
     createSquares(squaresContainer, userChoice);
     const controllersContainer = createControllersContainer();
     createToggleSwitch(controllersContainer);
     createCustomizeRange(controllersContainer);
     createClearBtn(controllersContainer);
+}
+
+function createTitle() {
+    const title = document.createElement("h1");
+    title.innerText = "Etch A Sketch";
+    document.body.appendChild(title);
 }
 
 function createSquaresContainer() {

@@ -7,6 +7,16 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(#df6e6e, #8489c4);
+}
+
+h1 {
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #767676;
+    box-shadow: 2px 2px #767676;
+    background-color: #d4d4d4;
 }
 
 .squares-container {
@@ -14,8 +24,9 @@ body {
     height: 500px;
     display: flex;
     flex-wrap: wrap;
-    border: 1px solid #767676;
-    box-shadow: 5px 5px 15px #767676;
+    border: 2px solid #767676;
+    box-shadow: 5px 5px #767676;
+    background-color: #ffffff;
 }
 
 .square {
@@ -28,6 +39,10 @@ body {
     align-items: center;
     justify-content: center;
     padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #767676;
+    box-shadow: 5px 5px #767676;
+    background-color: #d4d4d4;
 }
 
 .control {
@@ -46,11 +61,11 @@ body {
 }
 
 .clear-button {
-    background-color: #913a96;
+    background-color: #767676;
 }
 
 .clear-button:hover {
-    background-color: #b263b5;
+    background-color: #5c5c5c;
 }
 
 /*
@@ -80,7 +95,7 @@ Toggle switch
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #8d8a86;
+    background-color: #767676;
     -webkit-transition: 0.4s;
     transition: 0.4s;
 }
@@ -98,7 +113,13 @@ Toggle switch
 }
 
 input:checked + .slider {
-    background-color: #f39f21;
+    background: linear-gradient(
+            217deg,
+            rgba(255, 0, 0, 0.8),
+            rgba(255, 0, 0, 0) 70.71%
+        ),
+        linear-gradient(127deg, rgba(0, 255, 0, 0.8), rgba(0, 255, 0, 0) 70.71%),
+        linear-gradient(336deg, rgba(0, 0, 255, 0.8), rgba(0, 0, 255, 0) 70.71%);
 }
 
 input:focus + .slider {
