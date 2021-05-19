@@ -1,10 +1,12 @@
 window.addEventListener("DOMContentLoaded", createEtchASketch);
 
 let userChoice = 4;
+let colorChoice = false;
 function createEtchASketch() {
     const squaresContainer = createSquaresContainer();
     createSquares(squaresContainer, userChoice);
     const controllersContainer = createControllersContainer();
+    createToggleSwitch(controllersContainer);
     createCustomizeRange(controllersContainer);
     createClearBtn(controllersContainer);
 }
@@ -18,10 +20,28 @@ function createSquaresContainer() {
 }
 
 function colorizeSquare(e) {
-    if (e.target !== e.currentTarget) {
-        randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-        e.target.style.backgroundColor = randomColor;
+    let color;
+    if (colorChoice) {
+        color = randomRainbow();
+    } else {
+        color = randomGrey();
     }
+    if (e.target !== e.currentTarget) {
+        e.target.style.backgroundColor = color;
+    }
+}
+
+function randomGrey() {
+    const value = (Math.random() * 0xff) | 0;
+    const grayscale = (value << 16) | (value << 8) | value;
+    const color = "#" + grayscale.toString(16);
+    return color;
+}
+
+function randomRainbow() {
+    const color = (randomColor =
+        "#" + Math.floor(Math.random() * 16777215).toString(16));
+    return color;
 }
 
 function createSquares(container, squaresQuantity) {
@@ -47,12 +67,39 @@ function createControllersContainer() {
     return controllersContainer;
 }
 
+function createToggleSwitch(container) {
+    const label = document.createElement("label");
+    label.classList.add("switch");
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+
+    const span = document.createElement("span");
+    span.classList.add("slider");
+    span.classList.add("round");
+
+    label.appendChild(checkbox);
+    label.appendChild(span);
+
+    container.appendChild(label);
+    label.addEventListener("click", toggleColor);
+}
+
+function toggleColor(e) {
+    if (e.currentTarget.childNodes[0].checked) {
+        colorChoice = true;
+    } else {
+        colorChoice = false;
+    }
+}
+
 function createCustomizeRange(container) {
     const customizeRange = document.createElement("input");
     customizeRange.type = "range";
     customizeRange.min = "1";
     customizeRange.value = userChoice;
     customizeRange.classList.add("control");
+    customizeRange.classList.add("range");
     customizeRange.addEventListener("change", (e) => {
         updateSquares(e.target.value);
     });
