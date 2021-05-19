@@ -22,11 +22,11 @@ body {
     cursor: pointer;
 }
 
-.buttons-container {
+.controllers-container {
     display: flex;
 }
 
-.button {
+.control {
     margin: 30px 15px 0;
     color: #fff;
     border: none;
@@ -37,14 +37,6 @@ body {
     padding: 10px;
     cursor: pointer;
     box-shadow: 5px 5px 10px #767676;
-}
-
-.customize-button {
-    background-color: #4049c5;
-}
-
-.customize-button:hover {
-    background-color: #5258a9;
 }
 
 .clear-button {

@@ -1,12 +1,12 @@
 window.addEventListener("DOMContentLoaded", createEtchASketch);
 
+let userChoice = 4;
 function createEtchASketch() {
-    let userChoice = 4;
     const squaresContainer = createSquaresContainer();
     createSquares(squaresContainer, userChoice);
-    const btnsContainer = createBtnsContainer();
-    createCustomizeRange(btnsContainer);
-    createClearBtn(btnsContainer);
+    const controllersContainer = createControllersContainer();
+    createCustomizeRange(controllersContainer);
+    createClearBtn(controllersContainer);
 }
 
 function createSquaresContainer() {
@@ -26,7 +26,7 @@ function colorizeSquare(e) {
 
 function createSquares(container, squaresQuantity) {
     container.innerHTML = "";
-
+    userChoice = squaresQuantity;
     const containerWidth = window.getComputedStyle(container).width;
     const containerWithNum = containerWidth.slice(0, length - 2);
     const totalSquares = squaresQuantity * squaresQuantity;
@@ -40,19 +40,19 @@ function createSquares(container, squaresQuantity) {
     }
 }
 
-function createBtnsContainer() {
-    const btnsContainer = document.createElement("div");
-    btnsContainer.classList.add("buttons-container");
-    document.body.appendChild(btnsContainer);
-    return btnsContainer;
+function createControllersContainer() {
+    const controllersContainer = document.createElement("div");
+    controllersContainer.classList.add("controllers-container");
+    document.body.appendChild(controllersContainer);
+    return controllersContainer;
 }
 
 function createCustomizeRange(container) {
     const customizeRange = document.createElement("input");
     customizeRange.type = "range";
     customizeRange.min = "1";
-    customizeRange.classList.add("customize-range");
-    customizeRange.classList.add("button");
+    customizeRange.value = userChoice;
+    customizeRange.classList.add("control");
     customizeRange.addEventListener("change", (e) => {
         updateSquares(e.target.value);
     });
@@ -60,26 +60,29 @@ function createCustomizeRange(container) {
 }
 
 function updateSquares(userChoice) {
-    let userChoiceSanitized = parseInt(userChoice);
+    // let userChoiceSanitized = parseInt(userChoice);
     if (userChoice <= 0) {
-        userChoiceSanitized = 1;
+        userChoice = 1;
     }
 
     if (userChoice > 100) {
-        userChoiceSanitized = 100;
+        userChoice = 100;
     }
 
     const container = document.getElementsByClassName("squares-container")[0];
-    createSquares(container, userChoiceSanitized);
+    createSquares(container, userChoice);
 }
 
 function createClearBtn(btnsContainer) {
     const clearBtn = document.createElement("button");
-    clearBtn.classList.add("button");
+    clearBtn.classList.add("control");
     clearBtn.classList.add("clear-button");
     clearBtn.innerText = "Clear";
-    btnsContainer.appendChild(clearBtn);
     clearBtn.addEventListener("click", () => {
-        createSquares;
+        const container =
+            document.getElementsByClassName("squares-container")[0];
+
+        createSquares(container, userChoice);
     });
+    btnsContainer.appendChild(clearBtn);
 }
